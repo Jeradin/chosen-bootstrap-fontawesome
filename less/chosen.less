@@ -1,95 +1,94 @@
+//@import "_variables.less";
+//@import "_mixins.less";
+
+/* jquery.choosen.js
+-------------------------------------------------- */
 /* @group Base */
 .chzn-container {
-  font-size: 13px;
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  zoom: 1;
-  *display: inline;
+  text-align: left;
 }
 .chzn-container .chzn-drop {
   background: #fff;
-  border: 1px solid #aaa;
+  border: 1px solid @input-border;
   border-top: 0;
   position: absolute;
   top: 100%;
   left: -9999px;
   .box-shadow(0 4px 5px rgba(0,0,0,.15));
   z-index: 1010;
+  border-radius: 0 0 @input-border-radius @input-border-radius;
   width: 100%;
-  -moz-box-sizing   : border-box;
-  -ms-box-sizing    : border-box;
-  -webkit-box-sizing: border-box;
-  -khtml-box-sizing : border-box;
-  box-sizing        : border-box;
 }
-
 .chzn-container.chzn-with-drop .chzn-drop {
-  left: 0;
-}
+   left: 0;
+ }
 
 /* @end */
 
 /* @group Single Chosen */
 .chzn-container-single .chzn-single {
-  #gradient > .vertical-three-colors(#ffffff, #eeeeee, 50%, #f4f4f4);
-  border-radius: 5px;
-  .background-clip(padding-box);
-  border: 1px solid #aaaaaa;
-  .box-shadow(~'0 0 3px #ffffff inset, 0 1px 1px rgba(0,0,0,0.1)');
-  @transition: border linear .2s, box-shadow linear .2s;
-  .transition(@transition);
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
   position: relative;
-  height: 23px;
-  line-height: 24px;
-  padding: 0 0 0 8px;
-  color: #444444;
   text-decoration: none;
+  // Copied from forms.less in bootstrap and slightly altered:
+  display: block;
+  min-height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  padding: 6px 0 6px 9px;
+  // margin-bottom: (@line-height-base / 2);
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @gray;
+  background-color: @input-bg;
+  border: 1px solid @input-border;
+  border-radius: @input-border-radius;
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  .transition(~"border linear .2s, box-shadow linear .2s");
 }
+
 .chzn-container-single .chzn-default {
-  color: #999;
+  color: @input-color-placeholder;
 }
+
 .chzn-container-single .chzn-single span {
   margin-right: 26px;
   display: block;
   .text-overflow()
 }
 .chzn-container-single .chzn-single abbr {
-  display: block;
   position: absolute;
-  right: 26px;
-  top: 6px;
-  color: #444;
+  top: 4px;
+  right: 30px;
   &:before {
     content: '\00D7';
     font-weight: bold;
-    font-size: 12px;
-    line-height: @baseLineHeight;
+    font-size: 20px;
   }
 }
 .chzn-container-single .chzn-single abbr:hover,
 .chzn-container-single.chzn-disabled .chzn-single abbr:hover {
-  color: #000;
+  color: @gray-darker;
 }
+
 .chzn-container-single .chzn-single div {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 3px;
+  top: 13px;
   display: block;
   height: 100%;
   width: 18px;
 }
+
 .chzn-container-single .chzn-single div b {
-  &:after {
-    content: '\f078';
-    font-family: FontAwesome;
-  }
-  display: block;
-  width: 100%;
-  height: 100%;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-top:   5px solid @gray;
+  border-right: 5px solid transparent;
+  border-left:  5px solid transparent;
+  content: "";
 }
 .chzn-container-single .chzn-search {
   padding: 3px 4px;
@@ -97,61 +96,49 @@
   margin: 0;
   white-space: nowrap;
   z-index: 1010;
-  color: #555;
+  line-height: 0;
   &:after {
+    color: @gray-light;
     content: '\f002';
     font-family: FontAwesome;
-    position: relative;
+    position: absolute;
     right: 20px;
+    top: 50%;
   }
 }
 .chzn-container-single .chzn-search input {
   #gradient > .vertical(#eee, #fff);
   margin: 1px 0;
-  padding: 4px 20px 4px 5px;
   outline: 0;
-  border: 1px solid #aaa;
-  font-family: sans-serif;
-  font-size: 1em;
-  width: 100%;
-  -moz-box-sizing   : border-box;
-  -ms-box-sizing    : border-box;
-  -webkit-box-sizing: border-box;
-  -khtml-box-sizing : border-box;
-  box-sizing        : border-box;
+  padding-right: 25px;
+  width:100%;
 }
 .chzn-container-single .chzn-drop {
   margin-top: -1px;
-  border-radius: 0 0 4px 4px;
-  .background-clip(padding-box);
 }
 .chzn-container-single-nosearch .chzn-search {
-  position: absolute;
-  left: -9999px;
+  display: none;
 }
 /* @end */
 
 /* @group Multi Chosen */
 .chzn-container-multi .chzn-choices {
-  background-color: @inputBackground;
-  border: 1px solid @inputBorder;
-  border-radius: @inputBorderRadius;
-  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
-  @transition: border linear .2s, box-shadow linear .2s;
-  .transition(@transition);
   margin: 0;
   padding: 0;
   cursor: text;
   overflow: hidden;
   height: auto !important;
-  height: 1%;
   position: relative;
-  width: 100%;
-  -moz-box-sizing   : border-box;
-  -ms-box-sizing    : border-box;
-  -webkit-box-sizing: border-box;
-  -khtml-box-sizing : border-box;
-  box-sizing        : border-box;
+  // Copied from forms.less in bootstrap and slightly altered:
+  //min-height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  color: @gray;
+  background-color: @input-bg;
+  border: 1px solid @input-border;
+  border-radius: @input-border-radius;
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  .transition(~"border linear .2s, box-shadow linear .2s");
 }
 .chzn-container-multi .chzn-choices li {
   float: left;
@@ -163,35 +150,32 @@
   padding: 0;
 }
 .chzn-container-multi .chzn-choices .search-field input {
-  color: #666;
   background: transparent !important;
   border: 0 !important;
-  font-family: sans-serif;
-  font-size: 100%;
-  height: 15px;
-  padding: 5px;
-  margin: 1px 0;
   outline: 0;
   .box-shadow(none);
 }
 .chzn-container-multi .chzn-choices .search-field .default {
-  color: #999;
+  color: @input-color-placeholder;
 }
 .chzn-container-multi .chzn-choices .search-choice {
-  .border-radius(3px);
+  position: relative;
+  cursor: default;
+  margin: 6px 0 0 0.25em;
   .background-clip(padding-box);
   #gradient > .vertical-three-colors(#f4f4f4, #f0f0f0, 50%, #eeeeee);
   .box-shadow(~'0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05)');
-  color: #333;
   border: 1px solid #aaaaaa;
-  line-height: 13px;
-  padding: 3px 20px 3px 5px;
-  margin: 3px 0 3px 5px;
-  position: relative;
-  cursor: default;
+  color: #333;
+  // from labels.less
+  padding: .25em 20px 0.25em .6em;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  border-radius: .25em;
 }
 .chzn-container-multi .chzn-choices .search-choice.search-choice-disabled {
-  #gradient > .vertical-three-colors(#f4f4f4, #f0f0f0, 50%, #eeeeee);
   color: #999;
   border: 1px solid #cccccc;
   padding-right: 5px;
@@ -200,18 +184,15 @@
   background: #d4d4d4;
 }
 .chzn-container-multi .chzn-choices .search-choice .search-choice-close {
-  display: block;
   position: absolute;
-  right: 3px;
-  top: 4px;
-  width: 12px;
-  height: 12px;
+  right: 5px;
+  top: 0;
   color: #999;
   &:before {
     content: '\00D7';
     font-size: 20px;
     font-weight: bold;
-    line-height: 14px;
+    line-height: 16px;
     text-shadow: 0 1px 0 #fff;
   }
 }
@@ -239,8 +220,7 @@
 }
 .chzn-container .chzn-results li {
   display: none;
-  line-height: 15px;
-  padding: 5px 6px;
+  padding: 4px 5px;
   margin: 0;
   list-style: none;
 }
@@ -249,9 +229,8 @@
   display: list-item;
 }
 .chzn-container .chzn-results .highlighted {
-  #gradient > .vertical ( lighten(@linkColor, 5%), darken(@linkColor, 5%) );
+  background: @component-active-bg;
   color: #fff;
-  .border-radius(4px);
 }
 .chzn-container .chzn-results li em {
   background: #feffde;
@@ -266,7 +245,6 @@
 }
 .chzn-container .chzn-results .group-result {
   cursor: default;
-  color: #999;
   font-weight: bold;
 }
 .chzn-container .chzn-results .group-option {
@@ -275,69 +253,45 @@
 .chzn-container-multi .chzn-drop .result-selected {
   display: none;
 }
-.chzn-container .chzn-results-scroll {
-  background: white;
-  margin: 0 4px;
-  position: absolute;
-  text-align: center;
-  width: 321px; /* This should by dynamic with js */
-  z-index: 1;
-}
-.chzn-container .chzn-results-scroll span {
-  display: inline-block;
-  height: 17px;
-  text-indent: -5000px;
-  width: 9px;
-}
-.chzn-container .chzn-results-scroll-down {
-  bottom: 0;
-}
-.chzn-container .chzn-results-scroll-down span {
-  &:before {
-    content: '\f078';
-    font-family: FontAwesome;
-  }
-}
-.chzn-container .chzn-results-scroll-up span {
-  &:before {
-    content: '\f077';
-    font-family: FontAwesome;
-  }
-}
 /* @end */
 
 /* @group Active  */
 .chzn-container-active .chzn-single {
+  // from forms.less :focus
   border-color: rgba(82,168,236,.8);
-  .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
+  //.box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+  .box-shadow(0 0 8px rgba(82,168,236,.6));
 }
 .chzn-container-active.chzn-with-drop .chzn-single {
-  border: 1px solid #aaa;
-  .box-shadow(0 1px 0 #fff inset);
-  #gradient > .vertical(#eee, #fff);
+  border: 1px solid @input-border;
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
   .border-bottom-radius(0);
 }
-.chzn-container-active.chzn-with-drop .chzn-single div {
-  background: transparent;
-  border-left: none;
-}
-.chzn-container-active.chzn-with-drop .chzn-single div b:after {
-  content: '\f077';
+.chzn-container-active.chzn-with-drop .chzn-single div b {
+  border-bottom: 5px solid @gray;
+  border-top: none;
 }
 .chzn-container-active .chzn-choices {
-  .border-bottom-radius(0);
+  // from forms.less :focus
   border-color: rgba(82,168,236,.8);
-  .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
+  //.box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)");
+  .box-shadow(0 0 8px rgba(82,168,236,.6));
 }
-.chzn-container-active .chzn-choices .search-field input {
-  color: #111 !important;
+
+.chzn-container-active.chzn-with-drop .chzn-choices {
+  .border-bottom-radius(0);
 }
+
 /* @end */
 
 /* @group Disabled Support */
 .chzn-disabled {
   cursor: default;
-  opacity:0.5 !important;
+  opacity:0.5;
 }
 .chzn-disabled .chzn-single {
   cursor: default;
@@ -347,7 +301,7 @@
 }
 /* @end */
 
-/* @group error & success  */
+/* @group error & success
 .chosenFieldState(@color) {
   .chzn-container .chzn-single,
   .chzn-container .chzn-drop,
@@ -375,15 +329,15 @@
   }
 }
 .control-group.success {
-  .chosenFieldState(@successText);
+  .chosenFieldState(@state-success-text);
 }
 .control-group.error {
-  .chosenFieldState(@errorText);
+  .chosenFieldState(@state-danger-text);
 }
 .control-group.info {
-  .chosenFieldState(@infoText);
+  .chosenFieldState(@state-info-text);
 }
 .control-group.warning {
-  .chosenFieldState(@warningText);
+  .chosenFieldState(@state-warning-text);
 }
 /* @end */
